@@ -1,30 +1,63 @@
 from tkinter import *
+import tkinter.messagebox as message
+import subprocess as sp
+
+
+
+
+
+#main function
+def login():
+    useid= user_entry.get()
+    passw=pass_entry.get()
+    if useid=="admin" and passw =="nothing":
+        
+        status=Label(root,text="Loging in...........")
+        status.pack(side="bottom",fill=X)
+        
+        root.after(5000,lambda:root.destroy())
+        sp.run(["python","welcome.py"])
+        
 
 
 #functions for login,resgister
-def login():
+
+
+def login_status():
     c=0
     print("working on")
     status=Label(root,text="Loging in...........")
     status.pack(side="bottom",fill=X)
     root.after(5000,lambda:status.destroy())
 def resgister_ui():
-    resg=Tk()
-    resg.title("Resgister")
+    usernameR = user_entry.get()
+    passwsd=pass_entry.get()
+    if usernameR != "admin" and passwsd != "nothing":
+        resg=Tk()
+        resg.title("Resgister")
     
-    resg.resizable(False,False)
+        resg.resizable(False,False)
 
-    resg_label=Label(resg,text="Register",bg="lightblue",font=("Arial",20,"bold"))
-    resg_label.grid(row=0, column=1, columnspan=2, pady=10)
-    userR_label=Label(resg,text="Username",bg="lightblue",font=("Arial",12))
-    userR_entry = Entry(resg,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
-    userR_label.grid(row=3, column=0, padx=5, pady=5, sticky="E")
-    userR_entry.grid(row=3, column=1, padx=5, pady=5, sticky="W")
+        resg_label=Label(resg,text="Register",bg="lightblue",font=("Arial",20,"bold"))
+        resg_label.grid(row=0, column=1, columnspan=2, pady=10)
+        userR_label=Label(resg,text="Username",bg="lightblue",font=("Arial",12))
+        userR_entry = Entry(resg,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
+        userR_label.grid(row=3, column=0, padx=5, pady=5, sticky="E")
+        userR_entry.grid(row=3, column=1, padx=5, pady=5, sticky="W")
 
-    passR_label=Label(resg,text="Passcode",bg="lightblue",font=("Arial",12))
-    passR_entry = Entry(resg,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
-    passR_label.grid(row=4, column=0, padx=5, pady=5, sticky="E")
-    passR_entry.grid(row=4, column=1, padx=5, pady=5, sticky="W")
+        passR_label=Label(resg,text="Passcode",bg="lightblue",font=("Arial",12))
+        passR_entry = Entry(resg,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
+        passR_label.grid(row=4, column=0, padx=5, pady=5, sticky="E")
+        passR_entry.grid(row=4, column=1, padx=5, pady=5, sticky="W")
+
+
+        passccR_label=Label(resg,text="Confirm Passcode",bg="lightblue",font=("Arial",12))
+        passccR_entry = Entry(resg,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
+        passccR_label.grid(row=5, column=0, padx=5, pady=5, sticky="E")
+        passccR_entry.grid(row=5, column=1, padx=5, pady=5, sticky="W")
+        resg_button=Button(resg,text="Resgister",font=("Arial",12,"bold"),bg="blue",relief="raised")
+        resg_button.grid(row=6,column=1)
+    
 
       
 
@@ -58,7 +91,7 @@ user_label.grid(row=3, column=0, padx=5, pady=5, sticky="E")
 user_entry.grid(row=3, column=1, padx=5, pady=5, sticky="W")
 
 pass_label=Label(login_frame,text="Passcode",bg="lightblue",font=("Arial",12))
-pass_entry = Entry(login_frame,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
+pass_entry = Entry(login_frame,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center",show="*")
 pass_label.grid(row=4, column=0, padx=5, pady=5, sticky="E")
 pass_entry.grid(row=4, column=1, padx=5, pady=5, sticky="W")
 
@@ -69,7 +102,7 @@ login_button.grid(row=5,column=1)
 
 resgister_button=Button(login_frame,text="Resgister",font=("Arial",12,"bold"),bg="blue",relief="raised",command=resgister_ui)
 resgister_button.grid(row=6,column=1)
-#status bar
+
 
 
 
