@@ -10,13 +10,12 @@ import subprocess as sp
 def login():
     useid= user_entry.get()
     passw=pass_entry.get()
-    if useid=="admin" and passw =="nothing":
+    if useid.lower()=="admin" and passw.lower()=="nothing":
         
         status=Label(root,text="Loging in...........")
         status.pack(side="bottom",fill=X)
         
-        root.after(5000,lambda:root.destroy())
-        sp.run(["python","welcome.py"])
+        root.after(2000,lambda:root.destroy())
         
 
 
@@ -73,34 +72,34 @@ backgroundlabel.image=background
 backgroundlabel.place(relwidth=1,relheight=1)
 
 #----login desgin----
-login_frame = Frame(root, bg="lightblue", bd=5)
+login_frame = Frame(root, bg="black", bd=6)
 login_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.5, relheight=0.5)
 
-login_label=Label(login_frame,text="LOGIN",bg="lightblue",font=("Arial",20,"bold"))
+login_label=Label(login_frame,text="LOGIN",bg="black",fg="white",font=("Arial",20,"bold"))
 login_label.grid(row=0, column=1, columnspan=2, pady=10)
 #radiobutton work
-role=StringVar(value="user")
+"""role=StringVar(value="user")
 admin_radio=Radiobutton(login_frame,text="Admin",variable=role,value="admin",bg="lightblue")
 admin_radio.grid(row=2,column=0,padx=10)
 user_radio=Radiobutton(login_frame,text="User",variable=role,value="user",bg="lightblue")
-user_radio.grid(row=2,column=1)
+user_radio.grid(row=2,column=1)"""
 #entry work
-user_label=Label(login_frame,text="Username",bg="lightblue",font=("Arial",12))
+user_label=Label(login_frame,text="Username",bg="black",fg="white",font=("Arial",12),relief="raised")
 user_entry = Entry(login_frame,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center")
 user_label.grid(row=3, column=0, padx=5, pady=5, sticky="E")
 user_entry.grid(row=3, column=1, padx=5, pady=5, sticky="W")
 
-pass_label=Label(login_frame,text="Passcode",bg="lightblue",font=("Arial",12))
-pass_entry = Entry(login_frame,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center",show="*")
+pass_label=Label(login_frame,text="Passcode",bg="black",fg="white",font=("Arial",12),relief="raised")
+pass_entry = Entry(login_frame,bd=5,font=("Arial",14,"bold"),highlightbackground="black",justify="center",show="*",)
 pass_label.grid(row=4, column=0, padx=5, pady=5, sticky="E")
 pass_entry.grid(row=4, column=1, padx=5, pady=5, sticky="W")
 
 
 #button
-login_button=Button(login_frame,text="Login?",font=("Arial",12,"bold"),command=login,bg="blue",relief="raised")
+login_button=Button(login_frame,text="Login?",font=("Arial",12,"bold"),command=login,bg="black",fg="white",relief="raised")
 login_button.grid(row=5,column=1)
 
-resgister_button=Button(login_frame,text="Resgister",font=("Arial",12,"bold"),bg="blue",relief="raised",command=resgister_ui)
+resgister_button=Button(login_frame,text="Resgister",font=("Arial",12,"bold"),bg="black",fg="white",relief="raised",command=resgister_ui)
 resgister_button.grid(row=6,column=1)
 
 
