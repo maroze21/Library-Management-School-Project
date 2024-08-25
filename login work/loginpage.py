@@ -12,14 +12,16 @@ def login():
     passw=pass_entry.get()
     if useid.lower()=="admin" and passw.lower()=="nothing":
         
-        status=Label(root,text="Loging in...........")
-        status.pack(side="bottom",fill=X)
+        login_status()
         
-        root.after(2000,lambda:root.destroy())
-        
+        root.after(2100,lambda:root.destroy())
+        root.after(2100,lambda:sp.run(["python","adminpg.py"]))
+    
 
 
 #functions for login,resgister
+
+    
 
 
 def login_status():
@@ -27,7 +29,7 @@ def login_status():
     print("working on")
     status=Label(root,text="Loging in...........")
     status.pack(side="bottom",fill=X)
-    root.after(5000,lambda:status.destroy())
+    root.after(2000,lambda:status.destroy())
 def resgister_ui():
     usernameR = user_entry.get()
     passwsd=pass_entry.get()
