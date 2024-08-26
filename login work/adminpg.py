@@ -95,13 +95,13 @@ title_label = Label(root, text="Library Management System", font=("Arial", 24, "
 title_label.pack(pady=20)
 
 #buttons for admin
-button_frame = Frame(root, bg="lightgray")
+button_frame = Frame(root,bg="brown")
 button_frame.pack(pady=100)
 
-btn_style = {"font": ("Arial", 16), "width": 20, "bg": "#4CAF50", "fg": "white"}
-Button(button_frame, text="Search Books", command=search_window, **btn_style).pack(pady=10)
-Button(button_frame, text="Add Book", command=add_window, **btn_style).pack(pady=10)
-Button(button_frame, text="Remove Book", command=remove_window, **btn_style).pack(pady=10)
-Button(button_frame, text="Modify Book", command=modify_window, **btn_style).pack(pady=10)
+#btn_style = {"font": ("Arial", 16), "width": 20, "bg": "#4CAF50", "fg": "white"}
+Button(button_frame, text="Search Books", command=search_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
+Button(button_frame, text=" Add Book ", command=add_window,font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
+Button(button_frame, text="Remove Book", command=remove_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
+Button(button_frame, text="Modify Book", command=modify_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
 
 root.mainloop()
