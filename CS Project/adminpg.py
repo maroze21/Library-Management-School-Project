@@ -1,7 +1,12 @@
 from tkinter import *
 from tkinter import ttk
+import mysql.connector as sql
 
+
+mycon=sql.connect(host='localhost',username='root',password='root',database='library_management')
+mycur=mycon.cursor()
 #functions to search ,add ,delete,modify
+
 def search_window():
     search =Toplevel(root)
     search.title("Search Books")
@@ -26,11 +31,21 @@ def search_window():
     
     tree.pack(fill=BOTH, expand=True)
 
+
+
 def add_window():
     addw = Toplevel(root)
     addw.title("Add Book")
-    addw.geometry("400x300")
+    addw.geometry("600x500")
     addw.configure(bg="lightgreen")
+
+    Label(addw, text="BookID:", bg="lightgreen").pack(pady=5)
+    bookid_entry = Entry(addw)
+    bookid_entry.pack(pady=5)
+
+    Label(addw, text="Cost", bg="lightgreen").pack(pady=5)
+    Cost_entry = Entry(addw)
+    Cost_entry.pack(pady=5)
     
     Label(addw, text="Title:", bg="lightgreen").pack(pady=5)
     title_entry = Entry(addw)
@@ -48,10 +63,12 @@ def add_window():
     availability_entry =Entry(addw)
     availability_entry.pack(pady=5)
     
-    Button(addw, text="Add Book", command=lambda: addvaluestodb(title_entry.get(), author_entry.get(), genre_entry.get(), availability_entry.get()), bg="white").pack(pady=20)
+    Button(addw, text="Add Book", command=lambda: addvaluestodb(bookid_entry.get(),title_entry.get(),Cost_entry.get(), author_entry.get(), genre_entry.get(), availability_entry.get()), bg="white").pack(pady=20)
 
-def addvaluestodb(title, author, genre, availability):
-    print(f"Adding book: {title}, {author}, {genre}, {availability}")
+def addvaluestodb(bookid, title,cost, author, genre, availability):
+    st="insert ignore into(book_id,book_name,cost,author,genre,available) books values (%s,'%s',%s,'%s','%s',%s)"
+    mycur.execute(st,(bookid,cost,title,author,genre,availability))
+    mycon.commit()
 
 #function to open the remove window
 def remove_window():
