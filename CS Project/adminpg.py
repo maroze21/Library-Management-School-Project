@@ -13,7 +13,7 @@ def search_window():
     search.geometry("800x400")
     search.configure(bg="lightblue")
     
-    columns = ("ID", "Title", "Author", "Genre", "Availability")
+    columns = ("ID", "Title" ,"Cost","Author", "Genre", "Availability")
     tree = ttk.Treeview(search, columns=columns, show='headings')
     
     for col in columns:
@@ -21,12 +21,15 @@ def search_window():
         tree.column(col, anchor='center', width=100)
     
     #just for testing as database yet to be connected
-    bookdata = [
+    """bookdata = [
         (1, "Python Programming", "John Doe", "Programming", "Available"),
         (2, "Data Structures", "Jane Smith", "Education", "Issued"),
-    ]
+    ]"""
+    ask="select * from books"
+    mycur.execute(ask)
+    result=mycur.fetchall()
     
-    for item in bookdata:
+    for item in result:
         tree.insert('', 'end', values=item)
     
     tree.pack(fill=BOTH, expand=True)
