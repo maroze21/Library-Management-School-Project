@@ -11,6 +11,10 @@ cur.execute("use Library")
 cur.execute("create table if not exists Members(UserName varchar(20), Password varchar(10))")
 
 #main function
+
+    
+def openmember():
+    sp.run(['python','member.py'])
 def login():
     useid= user_entry.get()
     passw=pass_entry.get()
@@ -19,7 +23,18 @@ def login():
         login_status()
         
         root.after(2100,root.destroy())
-        root.after(2100,lambda:sp.run(["python","adminpg.py"]))
+        root.after(2100,lambda:sp.run(["python","adminpg.py" ]))
+    else:
+        ask="select * from Members where UserName=%s and Password=%s"
+        cur.execute(ask,(useid,passw))
+        result=cur.fetchone()
+        if result :
+            messagebox.showinfo("Login"," Login is Successful ")
+            root.after(2100,root.destroy())
+            root.after(2000,openmember)
+        else:
+            messagebox.showerror("ERROR","Invalid UserName or Passcode")
+
     
 
 #functions for login,resgister  
@@ -82,7 +97,9 @@ root.title("Login")
 root.geometry("800x600")
 root.resizable(False,False)
 #background
-background =PhotoImage(file="librarybg.png")
+#had to give this big path as it was not recognizging image pos
+background = PhotoImage(file="C:/Users/USER/Desktop/Library-Management-School-Project/CS Project/librarybg.png")
+
 backgroundlabel =Label(root,image=background)
 backgroundlabel.image=background
 backgroundlabel.place(relwidth=1,relheight=1)
