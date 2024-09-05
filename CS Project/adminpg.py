@@ -101,7 +101,7 @@ root.title("Library Management System")
 root.geometry("800x600")
 
 #background work
-background_image =PhotoImage(file="C:\Users\USER\Desktop\Library-Management-School-Project\CS Project\library_background_1920x1024.png")
+background_image =PhotoImage(file="library_background_1920x1024.png")
 background_label =Label(root, image=background_image)
 background_label.place(relwidth=1, relheight=1)
 

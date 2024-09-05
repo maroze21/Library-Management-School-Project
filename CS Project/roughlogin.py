@@ -86,7 +86,7 @@ pass_entry.grid(row=4, column=1, padx=5, pady=5, sticky="W")
 login_button=Button(login_frame,text="Login",font=("Arial",12,"bold"),command=login,bg="black",fg="white",relief="raised")
 login_button.grid(row=5,column=1,pady=7)
 
-register_label=Label(login_frame,text="Don't have an account?",bg="black",fg="white",font=("Georgia",15))
+register_label=Label(login_frame,text="Don't have an account?",bg="black",fg="white",font=("Georgia",12))
 register_label.grid(row=8,column=1,pady=5)
 resgister_button=Button(login_frame,text="Register",font=("Arial",12,"bold"),bg="black",fg="white",relief="raised",command=register_ui)
 resgister_button.grid(row=9,column=1)
