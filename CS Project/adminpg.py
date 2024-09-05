@@ -91,7 +91,7 @@ def remove_window():
 def removebookfromdb(book_id):
     
     remove="delete from books where book_id=%s"
-    mycur.execute(remove,(book_id))
+    mycur.execute(remove,(book_id,))
     mycon.commit()
 
 
@@ -100,6 +100,9 @@ def modify_window():
     modify_window.title("Modify Book")
     modify_window.geometry("400x300")
     modify_window.configure(bg="lightyellow")
+    
+def modifydb():
+    s1="update books set boo"
 
 #main 
 root = Tk()
