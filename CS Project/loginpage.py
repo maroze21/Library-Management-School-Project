@@ -98,7 +98,7 @@ root.geometry("800x600")
 root.resizable(False,False)
 #background
 #had to give this big path as it was not recognizging image pos
-background = PhotoImage(file="C:/Users/USER/Desktop/Library-Management-School-Project/CS Project/librarybg.png")
+background = PhotoImage(file="librarybg.png")
 
 backgroundlabel =Label(root,image=background)
 backgroundlabel.image=background
