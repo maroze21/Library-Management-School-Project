@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import mysql.connector as sql
+import tkinter.messagebox as messagebox
 
 
 mycon=sql.connect(host='localhost',username='root',password='root',database='library_management')
@@ -66,12 +67,13 @@ def add_window():
     availability_entry =Entry(addw)
     availability_entry.pack(pady=5)
     
-    Button(addw, text="Add Book", command=lambda: addvaluestodb(bookid_entry.get(),title_entry.get(),Cost_entry.get(), author_entry.get(), genre_entry.get(), availability_entry.get()), bg="white").pack(pady=20)
+    Button(addw, text="Add Book", command=lambda: addvaluestodb(bookid_entry.get(),title_entry.get(),Cost_entry.get(),availability_entry.get(), author_entry.get(), genre_entry.get()), bg="white").pack(pady=20)
 
-def addvaluestodb(bookid, title,cost, author, genre, availability):
-    st="insert ignore into(book_id,book_name,cost,author,genre,available) books values (%s,'%s',%s,'%s','%s',%s)"
-    mycur.execute(st,(bookid,cost,title,author,genre,availability))
-    mycon.commit()
+def addvaluestodb(bookid, title,cost,availability,author,genre):
+   st = "INSERT IGNORE INTO books (book_id,book_name,cost,avaiable,author,genre) VALUES (%s, %s, %s, %s, %s, %s)"
+   mycur.execute(st, (bookid, title, cost, availability, author, genre))
+    
+   mycon.commit()
 
 #function to open the remove window
 def remove_window():
@@ -87,7 +89,11 @@ def remove_window():
     Button(removew, text="Remove", command=lambda: removebookfromdb(book_id_entry.get()), bg="white").pack(pady=20)
 
 def removebookfromdb(book_id):
-    print(f"Removing book with ID: {book_id}")
+    
+    remove="delete from books where book_id=%s"
+    mycur.execute(remove,(book_id))
+    mycon.commit()
+
 
 def modify_window():
     modify_window =Toplevel(root)
@@ -101,7 +107,7 @@ root.title("Library Management System")
 root.geometry("800x600")
 
 #background work
-background_image =PhotoImage(file="C:\Users\USER\Desktop\Library-Management-School-Project\CS Project\library_background_1920x1024.png")
+background_image =PhotoImage(file="library_background_1920x1024.png")
 background_label =Label(root, image=background_image)
 background_label.place(relwidth=1, relheight=1)
 
