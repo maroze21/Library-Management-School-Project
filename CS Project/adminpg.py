@@ -102,7 +102,7 @@ def modify_window():
     modify_window.configure(bg="lightyellow")
     
 def modifydb():
-    s1="update books set boo"
+    s1="update books set book"
 
 #main 
 root = Tk()
