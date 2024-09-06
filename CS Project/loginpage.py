@@ -45,7 +45,7 @@ def login_status():
     print("working on")
     status=Label(root,text="Logging in...........")
     status.pack(side="bottom",fill=X)
-    root.after(2000, lambda:status.destroy())
+    root.after(6000, lambda:status.destroy())
 
 def register_ui():
     usernameR = user_entry.get()
