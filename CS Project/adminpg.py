@@ -7,25 +7,54 @@ import tkinter.messagebox as messagebox
 mycon=sql.connect(host='localhost',username='root',password='root',database='library_management')
 mycur=mycon.cursor()
 #functions to search ,add ,delete,modify
-
 def search_window():
-    search =Toplevel(root)
+    search = Toplevel(root)
     search.title("Search Books")
     search.geometry("800x400")
     search.configure(bg="lightblue")
-    
+
+    Label(search,text="Search Books").pack(pady=5)
+    search_entry=Entry(search)
+    search_entry.pack(pady=5)
+
+    def addBooks():
+        #mysql
+        searchdt=search_entry.get().lower()
+        m="SELECT * FROM books WHERE book_name=%s"
+        mycur.execute(m,(searchdt,))
+        result=mycur.fetchone()
+
+        for item in tree.get_children():
+            tree.delete(item)
+
+        for i in result:
+            tree.insert('',"end",values=result)
     columns = ("ID", "Title" ,"Cost","Author", "Genre", "Availability")
     tree = ttk.Treeview(search, columns=columns, show='headings')
+
+    for col in columns:
+        tree.heading(col,text=col)
+        tree.column(col,anchor=CENTER,width=100)
+    tree.pack(fill=BOTH,expand=True)
+
+
+def view_window():
+    view =Toplevel(root)
+    view.title("View Books")
+    view.geometry("800x400")
+    view.configure(bg="lightblue")
+    
+    columns = ("ID", "Title" ,"Cost","Author", "Genre", "Availability")
+    tree = ttk.Treeview(view, columns=columns, show='headings')
     
     for col in columns:
         tree.heading(col, text=col)
         tree.column(col, anchor='center', width=100)
     
-    #just for testing as database yet to be connected
-    """bookdata = [
-        (1, "Python Programming", "John Doe", "Programming", "Available"),
-        (2, "Data Structures", "Jane Smith", "Education", "Issued"),
-    ]"""
+    scrollbar = Scrollbar(view, orient="vertical", command=tree.yview)
+    tree.configure(yscroll=scrollbar.set)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    
     ask="select * from books"
     mycur.execute(ask)
     result=mycur.fetchall()
@@ -158,6 +187,7 @@ button_frame = Frame(root,bg="brown")
 button_frame.pack(pady=100)
 
 #btn_style = {"font": ("Arial", 16), "width": 20, "bg": "#4CAF50", "fg": "white"}
+Button(button_frame, text="View", command=view_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
 Button(button_frame, text="Search Books", command=search_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
 Button(button_frame, text=" Add Book ", command=add_window,font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
 Button(button_frame, text="Remove Book", command=remove_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
