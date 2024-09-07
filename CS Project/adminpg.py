@@ -124,11 +124,12 @@ def remove_window():
     Button(removew, text="Remove", command=lambda: removebookfromdb(book_id_entry.get()), bg="white").pack(pady=20)
 
 def removebookfromdb(book_id):
-    
-    remove="delete from books where book_id=%s"
-    mycur.execute(remove,(book_id,))
-    mycon.commit()
-    messagebox.showinfo("Success!!","  Book is removed  ")
+    c=messagebox.askquestion("Remove","Are you Sure?")
+    if c=="yes":
+        remove="delete from books where book_id=%s"
+        mycur.execute(remove,(book_id,))
+        mycon.commit()
+        messagebox.showinfo("Success!!","  Book is removed  ")
     
 
 
@@ -171,11 +172,14 @@ def modify_window():
     
 def modifydb(book_id,title,cost,available,author,genre):
  
-    s1="update books set book_name=%s,cost=%s,avaiable=%s,author=%s,genre=%s where book_id=%s"
-    mycur.execute(s1,(title,cost,available,author,genre,book_id))
-    mycon.commit()
-    messagebox.showinfo("SUCCESS","Modified successfully")
-
+    try:
+        s1="update books set book_name=%s,cost=%s,avaiable=%s,author=%s,genre=%s where book_id=%s"
+        mycur.execute(s1,(title,cost,available,author,genre,book_id))
+        mycon.commit()
+        messagebox.showinfo("SUCCESS","Modified successfully")
+    except Exception as e:
+        mycon.rollback()
+        messagebox.showerror("ERROR","Please Make Sure to Enter All data")
 #main 
 root = Tk()
 root.title("Library Management System")
