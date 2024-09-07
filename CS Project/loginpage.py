@@ -95,10 +95,7 @@ root.title("Login")
 root.geometry("800x600")
 root.resizable(False, False)
 #background
-<<<<<<< HEAD
-#had to give this big path as it was not recognizging image pos
-=======
->>>>>>> 658d31ee15e77bddde26894bfc667111843057b6
+
 background = PhotoImage(file="librarybg.png")
 
 backgroundlabel = Label(root, image=background)
