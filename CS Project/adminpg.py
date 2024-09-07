@@ -27,11 +27,16 @@ def search_window():
         for item in tree.get_children():
             tree.delete(item)
 
-        for i in result:
+        if result:
             tree.insert('',"end",values=result)
+        else:
+            messagebox.showerror("ERROR","No book found")
+            
     columns = ("ID", "Title" ,"Cost","Author", "Genre", "Availability")
     tree = ttk.Treeview(search, columns=columns, show='headings')
 
+    #search button
+    Button(search,text="Search",anchor="center",relief="groove",command=addBooks).pack(pady=5)
     for col in columns:
         tree.heading(col,text=col)
         tree.column(col,anchor=CENTER,width=100)
@@ -44,7 +49,7 @@ def view_window():
     view.geometry("800x400")
     view.configure(bg="lightblue")
     
-    columns = ("ID", "Title" ,"Cost","Author", "Genre", "Availability")
+    columns = ("ID", "Title" ,"Cost", "Availability","Author", "Genre",)
     tree = ttk.Treeview(view, columns=columns, show='headings')
     
     for col in columns:
