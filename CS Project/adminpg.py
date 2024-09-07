@@ -151,6 +151,10 @@ def modify_window():
     cost_entry=Entry(modify_window)
     cost_entry.pack(pady=5)
 
+    Label(modify_window,text="Available",bg="lightyellow").pack(pady=5)
+    avaliable_entry=Entry(modify_window)
+    avaliable_entry.pack(pady=5)
+
     Label(modify_window,text="Author",bg="lightyellow").pack(pady=5)
     author_entry=Entry(modify_window)
     author_entry.pack(pady=5)
@@ -159,19 +163,18 @@ def modify_window():
     genare_entry=Entry(modify_window)
     genare_entry.pack(pady=5)
      
-    Label(modify_window,text="Available",bg="lightyellow").pack(pady=5)
-    avaliable_entry=Entry(modify_window)
-    avaliable_entry.pack(pady=5)
+   
 
-    modifybutton=Button(modify_window,text="Modify",relief="raised",anchor=CENTER,command=lambda:modifydb(bookid_entry.get(),Title_entry.get(),cost_entry.get(),author_entry.get(),genare_entry.get(),avaliable_entry.get()))
+    modifybutton=Button(modify_window,text="Modify",relief="raised",anchor=CENTER,command=lambda:modifydb(bookid_entry.get(),Title_entry.get(),cost_entry.get(),avaliable_entry.get(),author_entry.get(),genare_entry.get()))
     modifybutton.pack(pady=5)
     
     
 def modifydb(book_id,title,cost,available,author,genre):
-    
-    s1="update books set book_id= %s,book_name=%s,cost=%s,avaiable=%s,author=%s,genre=%s"
-    mycur.execute(s1,(book_id,title,cost,available,author,genre))
+ 
+    s1="update books set book_name=%s,cost=%s,avaiable=%s,author=%s,genre=%s where book_id=%s"
+    mycur.execute(s1,(title,cost,available,author,genre,book_id))
     mycon.commit()
+    messagebox.showinfo("SUCCESS","Modified successfully")
 
 #main 
 root = Tk()
