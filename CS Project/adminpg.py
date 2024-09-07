@@ -125,12 +125,15 @@ def remove_window():
 
 def removebookfromdb(book_id):
     c=messagebox.askquestion("Remove","Are you Sure?")
-    if c=="yes":
-        remove="delete from books where book_id=%s"
-        mycur.execute(remove,(book_id,))
-        mycon.commit()
-        messagebox.showinfo("Success!!","  Book is removed  ")
-    
+    try:
+        if c=="yes":
+         remove="delete from books where book_id=%s"
+         mycur.execute(remove,(book_id,))
+         mycon.commit()
+         messagebox.showinfo("Success!!","  Book is removed  ")
+    except Exception as e:
+        mycon.rollback()
+        messagebox.showerror("ERROR","Book ID not avaliable")
 
 
 def modify_window():
