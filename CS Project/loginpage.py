@@ -22,7 +22,7 @@ def login():
     if useid.lower()=="admin" and passw.lower()=="nothing":
         
         login_status()
-        messagebox.showinfo("Login","Login is Successful")
+        
         root.after(3000, root.destroy())
         subprocess.run(["python","adminpg.py" ])
         
@@ -41,10 +41,11 @@ def login():
 #functions for login,resgister  
 
 def login_status():
-    c=0
+    
     print("working on")
     status=Label(root,text="Logging in...........")
     status.pack(side="bottom",fill=X)
+    messagebox.showinfo("Login","Login is Successful")
     root.after(6000, lambda:status.destroy())
 
 def register_ui():
@@ -95,10 +96,7 @@ root.title("Login")
 root.geometry("800x600")
 root.resizable(False, False)
 #background
-<<<<<<< HEAD
-#had to give this big path as it was not recognizging image pos
-=======
->>>>>>> 658d31ee15e77bddde26894bfc667111843057b6
+
 background = PhotoImage(file="librarybg.png")
 
 backgroundlabel = Label(root, image=background)

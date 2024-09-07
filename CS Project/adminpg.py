@@ -46,14 +46,14 @@ def add_window():
     Label(addw, text="BookID:", bg="lightgreen").pack(pady=5)
     bookid_entry = Entry(addw)
     bookid_entry.pack(pady=5)
-
-    Label(addw, text="Cost", bg="lightgreen").pack(pady=5)
-    Cost_entry = Entry(addw)
-    Cost_entry.pack(pady=5)
     
     Label(addw, text="Title:", bg="lightgreen").pack(pady=5)
     title_entry = Entry(addw)
     title_entry.pack(pady=5)
+
+    Label(addw, text="Cost", bg="lightgreen").pack(pady=5)
+    Cost_entry = Entry(addw)
+    Cost_entry.pack(pady=5)
     
     Label(addw, text="Author:", bg="lightgreen").pack(pady=5)
     author_entry = Entry(addw)
@@ -74,6 +74,7 @@ def addvaluestodb(bookid, title,cost,availability,author,genre):
    mycur.execute(st, (bookid, title, cost, availability, author, genre))
     
    mycon.commit()
+   messagebox.showinfo("Success","  Book is added successfully  ")
 
 #function to open the remove window
 def remove_window():
@@ -93,16 +94,50 @@ def removebookfromdb(book_id):
     remove="delete from books where book_id=%s"
     mycur.execute(remove,(book_id,))
     mycon.commit()
+    messagebox.showinfo("Success!!","  Book is removed  ")
+    
 
 
 def modify_window():
     modify_window =Toplevel(root)
     modify_window.title("Modify Book")
-    modify_window.geometry("400x300")
+    modify_window.geometry("600x500")
     modify_window.configure(bg="lightyellow")
+
+    #ui desgin
+    Label(modify_window,text="BookID",bg="lightyellow").pack(pady=5)
+    bookid_entry=Entry(modify_window)
+    bookid_entry.pack(pady=5)
     
-def modifydb():
-    s1="update books set book"
+    Label(modify_window,text="Title",bg="lightyellow").pack(pady=5)
+    Title_entry=Entry(modify_window)
+    Title_entry.pack(pady=5)
+    
+    Label(modify_window,text="Cost",bg="lightyellow").pack(pady=5)
+    cost_entry=Entry(modify_window)
+    cost_entry.pack(pady=5)
+
+    Label(modify_window,text="Author",bg="lightyellow").pack(pady=5)
+    author_entry=Entry(modify_window)
+    author_entry.pack(pady=5)
+
+    Label(modify_window,text="Genre",bg="lightyellow").pack(pady=5)
+    genare_entry=Entry(modify_window)
+    genare_entry.pack(pady=5)
+     
+    Label(modify_window,text="Available",bg="lightyellow").pack(pady=5)
+    avaliable_entry=Entry(modify_window)
+    avaliable_entry.pack(pady=5)
+
+    modifybutton=Button(modify_window,text="Modify",relief="raised",anchor=CENTER,command=lambda:modifydb(bookid_entry.get(),Title_entry.get(),cost_entry.get(),author_entry.get(),genare_entry.get(),avaliable_entry.get()))
+    modifybutton.pack(pady=5)
+    
+    
+def modifydb(book_id,title,cost,available,author,genre):
+    
+    s1="update books set book_id= %s,book_name=%s,cost=%s,avaiable=%s,author=%s,genre=%s"
+    mycur.execute(s1,(book_id,title,cost,available,author,genre))
+    mycon.commit()
 
 #main 
 root = Tk()
