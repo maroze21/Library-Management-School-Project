@@ -12,13 +12,14 @@ root.geometry("800x600")
 root.resizable(False, False)
 
 # Set background image
-background1 = PhotoImage(file="librarybg.png")
-backgroundlabel = Label(root, image=background1)
+try:
+    background1 = PhotoImage(file="librarybg.png")
+    backgroundlabel = Label(root, image=background1)
 
-backgroundlabel.place(relwidth=1, relheight=1)
+    backgroundlabel.place(relwidth=1, relheight=1)
 
-# Create a label that will "blend" with the background image
-#background2=PhotoImage(file="library2.png")
+except EXCEPTION as e:
+    print("load error")
 
 label = Label(root, text="Welcome to the Library Management System", font=("New Amsterdam", 20, "bold"),bg="black",fg="white")
 label.place(relx=0.5, rely=0.4, anchor="center")
