@@ -13,7 +13,7 @@ cur.execute("create table if not exists Members(UserName varchar(20), Password v
 #main function
 
 def openmember():
-    root.destroy()
+    root.after(3000, root.destroy())
     subprocess.run(['python','member.py'])
 
 def login():
@@ -56,26 +56,27 @@ def register_ui():
         global userR_entry, passR_entry, passccR_entry
         resg = Tk()
         resg.title("Register")
-        resg.geometry("600x350")
+        resg.geometry("500x300")
+        resg.configure(bg="black")
 
-        resg_label = Label(resg, text="Register", bg="lightblue", font=("Arial", 20, "bold"))
+        resg_label = Label(resg, text="Register", bg="black", font=("Arial", 20, "bold"),fg="white")
         resg_label.grid(row=0, column=1, columnspan=2, pady=10)
-        userR_label = Label(resg, text="Username", bg="lightblue", font=("Arial", 12))
+        userR_label = Label(resg, text="Username", bg="black", font=("Arial", 12),fg="white")
         userR_entry = Entry(resg, bd=5, font=("Arial", 14, "bold"), highlightbackground="black", justify="center")
         userR_label.grid(row=3, column=0, padx=5, pady=5, sticky="E")
         userR_entry.grid(row=3, column=1, padx=5, pady=5, sticky="W")
 
-        passR_label = Label(resg, text="Passcode", bg="lightblue", font=("Arial", 12))
+        passR_label = Label(resg, text="Passcode", bg="black",fg="white", font=("Arial", 12))
         passR_entry = Entry(resg, bd=5, font=("Arial", 14, "bold"), highlightbackground="black", justify="center", show="#")
         passR_label.grid(row=4, column=0, padx=5, pady=5, sticky="E")
         passR_entry.grid(row=4, column=1, padx=5, pady=5, sticky="W")
 
-        passccR_label = Label(resg, text="Confirm Passcode", bg="lightblue", font=("Arial", 12))
+        passccR_label = Label(resg, text="Confirm Passcode", bg="black",fg="white", font=("Arial", 12))
         passccR_entry = Entry(resg, bd=5, font=("Arial", 14, "bold"), highlightbackground="black", justify="center", show="#")
         passccR_label.grid(row=5, column=0, padx=5, pady=5, sticky="E")
         passccR_entry.grid(row=5, column=1, padx=5, pady=5, sticky="W")
 
-        resg_button = Button(resg, text="Register", font=("Arial", 12, "bold"), bg="blue", relief="raised", command=onClick)
+        resg_button = Button(resg, text="Register", font=("Arial", 12, "bold"), bg="grey", relief="raised", command=onClick)
         resg_button.grid(row=6, column=1)
 
 def onClick():

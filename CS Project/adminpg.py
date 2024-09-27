@@ -22,17 +22,18 @@ def search_window():
         searchdt=search_entry.get().lower()
         m="SELECT * FROM books WHERE book_name=%s"
         mycur.execute(m,(searchdt,))
-        result=mycur.fetchone()
+        result=mycur.fetchall()
 
         for item in tree.get_children():
             tree.delete(item)
 
         if result:
-            tree.insert('',"end",values=result)
+            for row in result:
+                tree.insert('',"end",values=row)
         else:
             messagebox.showerror("ERROR","No book found")
             
-    columns = ("ID", "Title" ,"Cost","Author", "Genre", "Availability")
+    columns = ("ID", "Title" ,"Availability","Cost","Author", "Genre")
     tree = ttk.Treeview(search, columns=columns, show='headings')
 
     #search button
@@ -104,11 +105,16 @@ def add_window():
     Button(addw, text="Add Book", command=lambda: addvaluestodb(bookid_entry.get(),title_entry.get(),Cost_entry.get(),availability_entry.get(), author_entry.get(), genre_entry.get()), bg="white").pack(pady=20)
 
 def addvaluestodb(bookid, title,cost,availability,author,genre):
-   st = "INSERT IGNORE INTO books (book_id,book_name,cost,avaiable,author,genre) VALUES (%s, %s, %s, %s, %s, %s)"
-   mycur.execute(st, (bookid, title, cost, availability, author, genre))
-    
-   mycon.commit()
-   messagebox.showinfo("Success","  Book is added successfully  ")
+   try:
+       st = "INSERT IGNORE INTO books (book_id,book_name,cost,avaiable,author,genre) VALUES (%s, %s, %s, %s, %s, %s)"
+       mycur.execute(st, (bookid, title, cost, availability, author, genre))
+       mycon.commit()
+       messagebox.showinfo("Success","  Book is added successfully  ")
+   except Exception as e:
+       mycon.rollback()
+       messagebox.showerror("ERROR","PLEASE ENTER DATA PROPERLY")
+       
+       
 
 #function to open the remove window
 def remove_window():
