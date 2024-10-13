@@ -3,11 +3,10 @@ import tkinter.messagebox as messagebox
 import subprocess 
 import mysql.connector as mc
 
-con = mc.connect(host='localhost',user='root',password='root',charset='utf8')
+con = mc.connect(host='localhost',user='root',password='root',charset='utf8',database="library_management")
 cur = con.cursor()
 
-cur.execute("create database if not exists Library")
-cur.execute("use Library")
+
 cur.execute("create table if not exists Members(UserName varchar(20), Password varchar(10))")
 
 #main function
@@ -54,7 +53,7 @@ def register_ui():
 
     if usernameR != "admin" and passwsd != "nothing":
         global userR_entry, passR_entry, passccR_entry
-        resg = Tk()
+        resg = Toplevel(root)
         resg.title("Register")
         resg.geometry("500x300")
         resg.configure(bg="black")
