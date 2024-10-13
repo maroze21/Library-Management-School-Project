@@ -14,7 +14,7 @@ cur.execute("create table if not exists Members(UserName varchar(20), Password v
 
 def openmember():
     root.after(3000, root.destroy())
-    subprocess.run(['python','member.py'])
+    subprocess.run(['python','memberpg.py'])
 
 def login():
     useid= user_entry.get()

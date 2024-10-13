@@ -2,11 +2,16 @@ from tkinter import *
 from tkinter import ttk
 import mysql.connector as sql
 import tkinter.messagebox as messagebox
-
+import subprocess
 
 mycon=sql.connect(host='localhost',username='root',password='root',database='library_management')
 mycur=mycon.cursor()
 #functions to search ,add ,delete,modify
+
+def openlogin():
+    root.after(3000,root.destroy())
+    subprocess.run(["python","loginpage.py"])
+
 def search_window():
     search = Toplevel(root)
     search.title("Search Books")
@@ -33,7 +38,7 @@ def search_window():
         else:
             messagebox.showerror("ERROR","No book found")
             
-    columns = ("ID", "Title" ,"Availability","Cost","Author", "Genre")
+    columns = ("ID", "Title" ,"Cost","Availability","Author", "Genre")
     tree = ttk.Treeview(search, columns=columns, show='headings')
 
     #search button
@@ -200,12 +205,12 @@ background_label =Label(root, image=background_image)
 background_label.place(relwidth=1, relheight=1)
 
 #title
-title_label = Label(root, text="Library Management System", font=("Arial", 24, "bold"), bg="#4CAF50", fg="white")
+title_label = Label(root, text="CHETTINAD LIBRARY", font=("Arial", 24, "bold"), bg="#4CAF50", fg="white")
 title_label.pack(pady=20)
 
 #buttons for admin
 button_frame = Frame(root,bg="brown")
-button_frame.pack(pady=100)
+button_frame.pack(pady=70)
 
 #btn_style = {"font": ("Arial", 16), "width": 20, "bg": "#4CAF50", "fg": "white"}
 Button(button_frame, text="View", command=view_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
@@ -213,5 +218,6 @@ Button(button_frame, text="Search Books", command=search_window, font=("Arial",1
 Button(button_frame, text=" Add Book ", command=add_window,font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
 Button(button_frame, text="Remove Book", command=remove_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
 Button(button_frame, text="Modify Book", command=modify_window, font=("Arial",16),fg="white",bg="black",relief="groove",width=20).pack(pady=10)
+Button(button_frame, text="Back",bg="black",fg="white",relief="sunken", font=("Arial", 12, "bold"),command=lambda:openlogin()).pack(pady=10)
 
 root.mainloop()
