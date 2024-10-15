@@ -7,7 +7,7 @@ con = mc.connect(host='localhost',user='root',password='root',charset='utf8',dat
 cur = con.cursor()
 
 
-cur.execute("create table if not exists Members(UserName varchar(20), Password varchar(10))")
+cur.execute("create table if not exists membership(UserName varchar(20), Password varchar(10))")
 
 #main function
 
