@@ -7,7 +7,7 @@ from datetime import datetime
 # Database connection
 con = mc.connect(host='localhost', user='root', password='root', charset='utf8')
 cur = con.cursor()
-
+cur.execute("create database if not exists library_management")
 # Use the library_management database
 cur.execute("USE library_management")
 
